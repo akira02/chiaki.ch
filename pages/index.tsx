@@ -6,8 +6,8 @@ import { makeStaticProps } from 'i18n/messages'
 
 const Home: NextPage = () => {
   return (
-    <Box backgroundColor="black" width="100%" minHeight="100vh">
-      <Box width="100vw" height="100vh" overflow="hidden">
+    <Box backgroundColor="black" width="100%" minHeight="100vh" overflowX="clip">
+      <Box width="100%" height="100vh" overflow="hidden">
         <CoverSection />
       </Box>
       <SocietyIntro />
