@@ -6,7 +6,7 @@ excerpt: "從救活停止維護十三年的 Yahoo 奇摩輸入法，到一份好
 cover: /assets/blog/writing-an-input-method-in-2026/01.webp
 tags: ["input-method", "bopomofo", "nlp", "chiakey", "open-source"]
 readingTime: 15
-draft: true
+draft: false
 ---
 
 ![](/assets/blog/writing-an-input-method-in-2026/01.webp)
