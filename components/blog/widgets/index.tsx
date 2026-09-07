@@ -1,7 +1,8 @@
 import { useEffect, useState, type RefObject } from 'react'
 import { createPortal } from 'react-dom'
 import { demoCss } from 'components/works/letterpress/pressOptions'
-import LetterpressPress from './LetterpressPress'
+import { LetterpressFilters } from 'kappan/react'
+import LetterpressPress, { NEUTRAL_OPTIONS } from './LetterpressPress'
 
 /**
  * 把 ```widget 佔位符換成真的元件。
@@ -42,6 +43,8 @@ const BlogWidgets = ({ containerRef }: { containerRef: RefObject<HTMLDivElement 
     <>
       {/* 只補字體檔。再掛一份 LetterpressStyles 會蓋掉整篇文章的 .lp。 */}
       <style dangerouslySetInnerHTML={{ __html: demoCss }} />
+      {/* 逐節比較的「標準」那一側共用這組濾鏡，各 widget 只掛自己變因側的。 */}
+      <LetterpressFilters {...NEUTRAL_OPTIONS} />
       {mounts.map(({ el, name, props }, index) => {
         const Widget = REGISTRY[name]
         return createPortal(<Widget {...props} />, el, String(index))
