@@ -29,6 +29,11 @@
     "width": 799,
     "height": 1024
   },
+  "blog/letterpress-on-the-web/01": {
+    "sourceHash": "90da4c417567e045",
+    "width": 1920,
+    "height": 1051
+  },
   "blog/letterpress-on-the-web/02": {
     "sourceHash": "3bd493ce42a8ca19",
     "width": 1520,
@@ -78,6 +83,11 @@
     "sourceHash": "b48e92e10eb160f2",
     "width": 1024,
     "height": 248
+  },
+  "blog/writing-an-input-method-in-2026/01": {
+    "sourceHash": "bdd06e9cbc0f42c7",
+    "width": 1920,
+    "height": 1199
   },
   "character/0_亞莓官方圖/大頭": {
     "sourceHash": "8a968b187f956440",
