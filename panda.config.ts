@@ -280,10 +280,17 @@ export default defineConfig({
     },
   },
   globalCss: {
+    // justfont's alias scan attributes an element's entire textContent to the
+    // webfont and rejects a font once a page sends it more than ~1300 chars.
+    // Keeping the alias off <body> skips the __NEXT_DATA__ script; skipping
+    // <main> on pages flagged data-jf-skip keeps long-form text out too.
     body: {
       bg: 'black',
-      fontFamily: 'body',
+      fontFamily: '"Noto Sans TC", sans-serif',
       fontWeight: 'normal',
+    },
+    'body > :not(script, style, #__next), #__next > :not(main), main:not(:has([data-jf-skip]))': {
+      fontFamily: 'body',
     },
     a: {
       color: 'inherit',

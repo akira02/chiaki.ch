@@ -16,7 +16,7 @@ const Blog: NextPage = () => {
   const { t } = useI18n()
 
   return (
-    <Box className={SHEET_CLASS} minHeight="100vh" overflowX="clip" position="relative">
+    <Box className={SHEET_CLASS} data-jf-skip minHeight="100vh" overflowX="clip" position="relative">
       <LetterpressStyles {...BLOG_OPTIONS} />
       <style dangerouslySetInnerHTML={{ __html: blogLetterpressCss }} />
 

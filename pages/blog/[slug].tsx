@@ -15,7 +15,6 @@ const Span = styled.span
 
 const prose = css({
   fontFamily: 'var(--type)',
-  // 明寫 400：跟全站 body 同一級，落在信黑 W3。
   fontWeight: 'regular',
   // 黑體字面比明體滿，級數略收；版心 696px 在 13pt 下約 40 字一行。
   fontSize: { base: '12pt', md: '13pt' },
@@ -134,7 +133,7 @@ const BlogPost: NextPage<{ post: Post }> = ({ post }) => {
   const proseRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Box className={SHEET_CLASS} minHeight="100vh" overflowX="clip" position="relative">
+    <Box className={SHEET_CLASS} data-jf-skip minHeight="100vh" overflowX="clip" position="relative">
       <LetterpressStyles {...BLOG_OPTIONS} />
       <style dangerouslySetInnerHTML={{ __html: blogLetterpressCss }} />
 
