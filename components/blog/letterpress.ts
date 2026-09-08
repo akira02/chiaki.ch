@@ -1,25 +1,25 @@
 import type { LetterpressOptions } from 'kappan'
 
 /**
- * blog 的排版設定，列表與內頁共用。刻意不掛墨壓濾鏡 —— 那組是為見本帖的展示級數
- * 調的，整篇套下去反而難讀。
+ * blog 的排版設定，列表與內頁共用。
  *
- * 正文走站上的 justfont 而不是 Google Fonts：後者按 unicode-range 切片，這篇 532 個
- * 相異字散在 21 片裡要 2.7MB，按實際用字切子集同一份只要 180KB。
+ * 正文跟全站一樣走 justfont 的信黑體。alias 'xingothic-tc' 由 justfont-init.js 掛好
+ * W3 / W6 / W8 三個字重，這裡的 400 / 600 / 700 會分別落到 W3 / W6 / W8。
+ * 不掛 punctFont：那套是給日星宋體補直排標點用的，黑體橫排用自己的標點就好。
  */
 export const BLOG_OPTIONS: LetterpressOptions = {
   paper: '#ffffff',
   ink: '#16130f',
   inkMuted: '#6d6558',
   red: '#a2372a',
-  typeFamily: "'notoserifcjktc', 'Noto Serif TC', 'Songti TC', serif",
+  typeFamily: "'xingothic-tc', 'Noto Sans TC', 'PingFang TC', sans-serif",
   latinFamily: "'Courier Prime', 'Courier New', ui-monospace, monospace",
   pitch: '1.9em',
-  punctFont: { family: 'lp-punct', src: '/fonts/lp-punct.woff2', weight: 600 },
+  punctFont: null,
 }
 
-/** per-face 的 class 照 justfont 文件掛著。沒有 .lp-paper —— 紙紋跟濾鏡是一組的。 */
-export const SHEET_CLASS = 'lp notoserifcjktc_medium notoserifcjktc_bold'
+/** 全站的信黑體不用 per-face class，justfont 直接掃 alias；這裡也跟著不掛。 */
+export const SHEET_CLASS = 'lp'
 
 /** 標籤與程式碼用的等寬體。@import 必須排在整份樣式最前面。 */
 export const blogLetterpressCss = `

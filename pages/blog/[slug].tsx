@@ -15,37 +15,44 @@ const Span = styled.span
 
 const prose = css({
   fontFamily: 'var(--type)',
-  // 明寫 400：版心掛了 _medium 與 _bold，justfont 注入的規則可能帶著 font-weight。
+  // 明寫 400：跟全站 body 同一級，落在信黑 W3。
   fontWeight: 'regular',
-  fontSize: { base: '12pt', md: '13.5pt' },
-  lineHeight: '2',
+  // 黑體字面比明體滿，級數略收；版心 696px 在 13pt 下約 40 字一行。
+  fontSize: { base: '12pt', md: '13pt' },
+  lineHeight: '1.9',
+  letterSpacing: '.02em',
   color: 'var(--ink)',
+  hangingPunctuation: 'allow-end',
   '& h2, & h3, & h4': {
     fontFamily: 'var(--type)',
-    fontWeight: 'bold',
     color: 'var(--ink)',
     lineHeight: '1.5',
-    letterSpacing: '.08em',
+    letterSpacing: '.06em',
+    textWrap: 'balance',
   },
-  '& h2': { fontSize: { base: '17pt', md: '21pt' }, mt: 14, mb: 5 },
-  '& h3': { fontSize: { base: '14pt', md: '16pt' }, mt: 10, mb: 3 },
-  '& h4': { fontSize: '13.5pt', mt: 8, mb: 3 },
-  '& p': { my: 6, textAlign: 'justify' },
+  '& h2': { fontSize: { base: '18pt', md: '22pt' }, fontWeight: 'bold', lineHeight: '1.55', mt: 14, mb: 5 },
+  '& h3': { fontSize: { base: '14pt', md: '15.5pt' }, fontWeight: 'medium', mt: 10, mb: 3 },
+  '& h4': { fontSize: '13pt', fontWeight: 'medium', mt: 8, mb: 3 },
+  '& h2 + h3': { mt: 6 },
+  '& p': { my: 6, textAlign: 'justify', textWrap: 'pretty', overflowWrap: 'break-word' },
   '& a': {
     color: 'var(--red)',
     borderBottom: '1px solid color-mix(in srgb, var(--red) 45%, transparent)',
     transition: 'border-color .2s',
     _hover: { borderBottomColor: 'var(--red)' },
   },
-  '& strong': { fontWeight: 'bold' },
+  // 信黑只掛到 W6，700 會落到 W8；內文粗體用 600 就夠對比，不會搶掉標題。
+  '& strong': { fontWeight: 'medium' },
   '& ul, & ol': { my: 6, pl: 7, display: 'flex', flexDirection: 'column', gap: 2 },
   '& li': { pl: 1 },
+  '& li::marker': { color: 'var(--ink3)' },
   '& blockquote': {
     my: 7,
     pl: 5,
     borderLeft: '3px solid var(--red)',
     color: 'var(--ink3)',
   },
+  '& blockquote p': { textAlign: 'start' },
   '& hr': {
     my: 12,
     border: 'none',
@@ -62,8 +69,15 @@ const prose = css({
     // 相片不是印出來的，給壓痕陰影而不是墨壓濾鏡。
     boxShadow: '0 1px 2px rgba(22, 19, 15, .24), 0 10px 22px rgba(22, 19, 15, .12)',
   },
-  // figure caption emitted as an italic paragraph right after an image
-  '& img + em, & video + em, & em': { color: 'var(--ink3)' },
+  // 黑體沒有斜體，瀏覽器合成的假斜體很難看；強調靠墨色淡一級就好。
+  '& em': { fontStyle: 'normal', color: 'var(--ink3)' },
+  // figure caption: an emphasis-only paragraph right after an image
+  '& p:has(> img:only-child, > video:only-child) + p:has(> em:only-child)': {
+    mt: -6,
+    fontSize: '.9em',
+    textAlign: 'center',
+    letterSpacing: '.04em',
+  },
   '& code': {
     fontFamily: 'var(--latin)',
     fontSize: '.86em',
@@ -79,8 +93,30 @@ const prose = css({
     border: '1px solid color-mix(in srgb, var(--red) 32%, transparent)',
     fontSize: { base: '0.78rem', md: '0.86rem' },
     lineHeight: '1.7',
+    letterSpacing: 0,
   },
   '& pre code': { backgroundColor: 'transparent', p: 0, fontSize: 'inherit' },
+  // Tables scroll on their own so a wide one never clips against the sheet.
+  '& table': {
+    display: 'block',
+    my: 8,
+    overflowX: 'auto',
+    borderCollapse: 'collapse',
+    fontSize: '.9em',
+    lineHeight: '1.6',
+    letterSpacing: 0,
+    fontVariantNumeric: 'tabular-nums',
+  },
+  '& th, & td': {
+    py: 2,
+    px: 3,
+    textAlign: 'start',
+    verticalAlign: 'top',
+    whiteSpace: 'nowrap',
+    borderBottom: '1px solid color-mix(in srgb, var(--ink) 18%, transparent)',
+  },
+  '& th': { fontWeight: 'medium', borderBottomColor: 'var(--ink)' },
+  '& tr:last-child td': { borderBottom: 'none' },
   // Widgets are figures, not prose — keep the reading rhythm around them but
   // stop the prose rules leaking into their own markup.
   '& [data-blog-widget]': { my: 12 },
@@ -89,7 +125,7 @@ const prose = css({
   '& .hljs-comment, & .hljs-quote': { color: 'var(--ink3)' },
   '& .hljs-keyword, & .hljs-selector-tag, & .hljs-built_in, & .hljs-literal': { color: 'var(--red)' },
   '& .hljs-string, & .hljs-attr, & .hljs-number': { color: 'color-mix(in srgb, var(--red) 72%, var(--ink))' },
-  '& .hljs-title, & .hljs-function, & .hljs-name, & .hljs-type, & .hljs-class': { fontWeight: 'bold' },
+  '& .hljs-title, & .hljs-function, & .hljs-name, & .hljs-type, & .hljs-class': { fontWeight: 'medium' },
 })
 
 const formatDate = (iso: string) => iso.replace(/-/g, '.')
@@ -127,7 +163,7 @@ const BlogPost: NextPage<{ post: Post }> = ({ post }) => {
               fontFamily: 'var(--type)',
               fontSize: 'clamp(26px, 5.4vw, 42px)',
               fontWeight: 700,
-              letterSpacing: '.12em',
+              letterSpacing: '.1em',
               lineHeight: 1.45,
             }}
           >

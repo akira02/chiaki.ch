@@ -63,7 +63,7 @@ const PostCard = ({ post, index }: { post: PostCardData; index: number }) => {
           </Heading>
           <Text
             maxW="60ch"
-            style={{ fontFamily: 'var(--type)', fontSize: '11pt', lineHeight: 1.95, color: 'var(--ink3)', textAlign: 'justify' }}
+            style={{ fontFamily: 'var(--type)', fontSize: '11pt', lineHeight: 1.9, letterSpacing: '.02em', color: 'var(--ink3)', textAlign: 'justify' }}
           >
             {post.excerpt}
           </Text>
