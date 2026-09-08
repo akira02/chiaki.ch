@@ -33,7 +33,7 @@ const prose = css({
   '& h3': { fontSize: { base: '14pt', md: '15.5pt' }, fontWeight: 'medium', mt: 10, mb: 3 },
   '& h4': { fontSize: '13pt', fontWeight: 'medium', mt: 8, mb: 3 },
   '& h2 + h3': { mt: 6 },
-  '& p': { my: 6, textAlign: 'justify', textWrap: 'pretty', overflowWrap: 'break-word' },
+  '& p': { my: 6, textAlign: 'start', textWrap: 'pretty', overflowWrap: 'break-word' },
   '& a': {
     color: 'var(--red)',
     borderBottom: '1px solid color-mix(in srgb, var(--red) 45%, transparent)',
@@ -51,7 +51,6 @@ const prose = css({
     borderLeft: '3px solid var(--red)',
     color: 'var(--ink3)',
   },
-  '& blockquote p': { textAlign: 'start' },
   '& hr': {
     my: 12,
     border: 'none',
